@@ -22,12 +22,17 @@ const AuthRegister = () => {
   function onSubmit(event) {
     event.preventDefault();
     dispatch(registerUser(formData))
-      .then((data) =>{
+      .then((data) => {
         if (data?.payload?.success) {
           toast({
             title: data?.payload?.message,
-        })
-        navigate('/auth/login')
+          })
+          navigate('/auth/login')
+        } else {
+          toast({
+            title: data?.payload?.message,
+            variant: 'destructive'
+          })
         }
       }
       ) 
