@@ -40,8 +40,6 @@ function App() {
   return (
     <>
       <div className='flex flex-col overflow-hidden bg-white '>
-        {/* common component */}
-        <h1 className='text-2xl'>header component</h1>
         <Routes>
           {/* login and register routes */}
           <Route path='/auth' element={
