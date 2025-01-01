@@ -103,4 +103,37 @@ export const addProductFormElements = [
       type: "number",
       placeholder: "Enter total stock",
     },
-  ];
+];
+  
+export const shoppingViewHeaderMenuItems = [
+  {
+    id: 'home',
+    label: 'Home',
+    path : '/shop/home'
+  },
+  {
+    id: 'men',
+    label: 'Menu',
+    path : '/shop/listig'
+  },
+  {
+    id: 'women',
+    label: 'Women',
+    path : '/shop/listig'
+  },
+  {
+    id: 'kids',
+    label: 'Kids',
+    path : '/shop/listig'
+  },
+  {
+    id: 'footwear',
+    label: 'Footwear',
+    path : '/shop/listig'
+  },
+  {
+    id: 'accessories',
+    label: 'Accessories',
+    path : '/shop/listig'
+  },
+]
