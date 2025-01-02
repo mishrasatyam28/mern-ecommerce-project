@@ -8,6 +8,7 @@ const dotenv = require('dotenv').config()
 // routes
 const authRouter = require('./routes/auth/auth-routes')
 const adminProductRouter = require('./routes/admin/products-routes')
+const shopProductsRouter = require('./routes/shop/products-routes')
 
 
 mongoose.connect(`${process.env.MONGO_URI}`)
@@ -44,6 +45,7 @@ app.use(express.json());
 // routes
 app.use('/api/auth', authRouter)
 app.use('/api/admin/products',adminProductRouter)
+app.use('/api/shop/products',shopProductsRouter)
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`)

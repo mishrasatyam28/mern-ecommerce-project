@@ -1,14 +1,14 @@
-import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from 'lucide-react'
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
-import { Button } from '../ui/button'
-import { useDispatch, useSelector } from 'react-redux'
 import { shoppingViewHeaderMenuItems } from '@/config'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '../ui/dropdown-menu'
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
-import { Avatar, AvatarFallback } from '../ui/avatar'
 import { logoutUser } from '@/store/auth-slice'
+import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
+import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from 'lucide-react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { Avatar, AvatarFallback } from '../ui/avatar'
+import { Button } from '../ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '../ui/dropdown-menu'
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
+
 
 
 function MenuItems(){
@@ -43,13 +43,13 @@ function HeaderRightContent() {
         <DropdownMenuTrigger asChild>
           <Avatar className='bg-black'>
             <AvatarFallback className="bg-black text-white font-extrabold">
-              {user.userName[0].toUpperCase()}
+              {user?.userName[0].toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="right" className="w-56">
           <DropdownMenuLabel>
-            Logged in as {user.userName}
+            Logged in as {user?.userName}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={()=>navigate('/shop/account')}>
@@ -102,5 +102,3 @@ export const ShoppingHeader = () => {
     </header>
   )
 }
-
-// 5:14
