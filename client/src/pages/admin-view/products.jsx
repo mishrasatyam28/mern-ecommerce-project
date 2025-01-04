@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { addProductFormElements } from '@/config'
 import { useToast } from '@/hooks/use-toast'
 import { addNewProduct, deleteProduct, editProduct, fetchAllProducts } from '@/store/admin/product-slice'
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const initialFormData = {
@@ -88,7 +88,7 @@ const AdminProducts = () => {
     dispatch(fetchAllProducts())
   }, [dispatch])
   
-  console.log(productList, "ProductData")
+  // console.log(productList, "ProductData")
 
   return (
     <Fragment>
@@ -99,6 +99,7 @@ const AdminProducts = () => {
         {
           productList && productList.length > 0 ?
             productList.map(productItem => <AdminProductTile
+              key={productItem._id}
               setFormData={setFormData}
               setOpenCreateProductsDialog = {setOpenCreateProductsDialog}
             setCurrentEditedId={setCurrentEditedId}

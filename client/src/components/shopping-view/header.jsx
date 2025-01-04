@@ -1,12 +1,11 @@
 import { shoppingViewHeaderMenuItems } from '@/config'
 import { logoutUser } from '@/store/auth-slice'
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '../ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
 
 
@@ -43,7 +42,8 @@ function HeaderRightContent() {
         <DropdownMenuTrigger asChild>
           <Avatar className='bg-black'>
             <AvatarFallback className="bg-black text-white font-extrabold">
-              {user?.userName[0].toUpperCase()}
+              {/* {user?.userName[0].toUpperCase()} */}
+              {user && user.userName ? user.userName[0].toUpperCase() : "?"}
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
@@ -89,6 +89,7 @@ export const ShoppingHeader = () => {
             <HeaderRightContent/>
           </SheetContent>
         </Sheet>
+
 {/* large devices */}
         <div className="hidden lg:block">
          <MenuItems/>
