@@ -7,7 +7,19 @@ import { fetchAllFilteredProducts } from "@/store/shop/product-slice"
 import { ArrowUpDown } from "lucide-react"
 import { useEffect, useId, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useSearchParams } from "react-router-dom"
 
+
+function createSearchParamsHelper(filterParams){
+  const queryParams = [];
+  for (const [key, value] of Object.entries(filterParams)) {
+    if (Array.isArray(value) && value.length > 0) {
+      const paramValue = value.join(',')
+      queryParams.push(`${key}=${encodeURIComponent(paramValue)}`)
+    }
+  }
+  return queryParams.join("&")
+}
 
 const ShoppingListing = () => {
 
@@ -16,6 +28,7 @@ const ShoppingListing = () => {
   const { productList } = useSelector(state => state.shopProducts)
   const [filters, setFilters] = useState({}) 
   const [sort, setSort] = useState(null);
+  const [searchParam, setSearchParam] = useSearchParams()
 
   function handleSort(value){
     console.log(value, "sort value check")
@@ -54,11 +67,19 @@ const ShoppingListing = () => {
   
   // fetch list of products
   useEffect(() => {
-   dispatch(fetchAllFilteredProducts())
- },[dispatch])
+    if(filters!==null && sort!==null)
+   dispatch(fetchAllFilteredProducts({filterParams:filters, sortParams:sort}))
+  }, [dispatch,sort,filters])
+  
+  useEffect(() => {
+    if (filters && Object.keys(filters).length > 0) {
+      const createQueryString = createSearchParamsHelper(filters)
+      setSearchParam(new URLSearchParams(createQueryString))
+    }
+  },[filters])
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 p-4 md:p-6">
+    <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
       <ProductFilter filters={filters} handleFilter={handleFilter}/>
       <div className="bg-background w-full rounded-lg shadow-sm">
         <div className="p-4 border-b flex items-center justify-between">
@@ -98,4 +119,4 @@ const ShoppingListing = () => {
 
 export default ShoppingListing
 
-// 6 : 20
+// 6 : 33
