@@ -133,5 +133,3 @@ const ShoppingListing = () => {
 }
 
 export default ShoppingListing
-
-// 6 : 33

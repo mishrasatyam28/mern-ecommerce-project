@@ -128,6 +128,3 @@ const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
 }
 
 export default ProductDetailsDialog
-
-
-// 6:58
