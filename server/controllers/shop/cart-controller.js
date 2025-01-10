@@ -232,5 +232,3 @@ module.exports = {
     deleteCartItems,
     fetchCartItems
 }
-
-//7:05
