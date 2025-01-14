@@ -43,7 +43,6 @@ const addToCart = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(first);
         res.status(500).json({
             success: false,
             message:"Error while adding to cart"
@@ -63,7 +62,7 @@ const fetchCartItems = async (req, res) => {
         }
 
         const cart = await Cart.findOne({ userId }).populate({
-            path: 'item.productId',
+            path: 'items.productId',
             select:'image title price salePrice'
         })
 
@@ -99,7 +98,6 @@ const fetchCartItems = async (req, res) => {
             }
         })
     } catch (error) {
-        console.log(first);
         res.status(500).json({
             success: false,
             message:"Error while fetching to cart"
@@ -160,7 +158,6 @@ const updateCartItems = async (req, res) => {
             }
         })
     } catch (error) {
-        console.log(first);
         res.status(500).json({
             success: false,
             message:"Error while fetching to cart"
@@ -194,7 +191,7 @@ const deleteCartItems = async (req, res) => {
         
         await cart.save();
 
-        await Cart.populate({
+        await cart.populate({
             path: 'items.productId',
             select:'image title price salePrice',
         })
@@ -217,7 +214,6 @@ const deleteCartItems = async (req, res) => {
             }
         })
     } catch (error) {
-        console.log(first);
         res.status(500).json({
             success: false,
             message:"Error while fetching to cart"
