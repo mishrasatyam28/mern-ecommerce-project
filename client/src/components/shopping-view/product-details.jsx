@@ -1,5 +1,6 @@
 import { useToast } from "@/hooks/use-toast"
 import { addToCart, fetchCartItems } from "@/store/shop/cart-slice"
+import { setProductDetails } from "@/store/shop/product-slice"
 import { StarIcon } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
 import { Avatar, AvatarFallback } from "../ui/avatar"
@@ -26,10 +27,15 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
             })
           } 
         )
-      }
+    }
+    
+    function handleDialogClose() {
+        setOpen(false);
+        dispatch(setProductDetails())
+    }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleDialogClose}>
           <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-[70vw]:">
               <div className="relative overflow-hidden rounded-lg">
                   <img

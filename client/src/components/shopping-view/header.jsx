@@ -8,18 +8,35 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
+import { Label } from '../ui/label'
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
 import UserCartWrapper from './cart-wrapper'
 
 
 
-function MenuItems(){
+function MenuItems() {
+
+  const navigate = useNavigate()
+  
+  function handleNavigate(getCurrentMenuItem) {
+    sessionStorage.removeItem('filters');
+    const currentFilters = getCurrentMenuItem.id !== 'home' ? {
+      category: [getCurrentMenuItem.id]
+      
+    } : null
+    sessionStorage.setItem('filters', JSON.stringify(currentFilters))
+    navigate(getCurrentMenuItem.path)
+  }
+
   return (
     <nav className='flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row'>
       {
-        shoppingViewHeaderMenuItems.map(menuItem => <Link className='text-sm font-medium' key={menuItem.id} to={menuItem.path}>
+        shoppingViewHeaderMenuItems.map(menuItem => <Label
+          onClick={()=>handleNavigate(menuItem)}
+          className='text-sm font-medium cursor-pointer'
+          key={menuItem.id}>
         {menuItem.label}
-        </Link>
+        </Label>
         )
       }
     </nav>
@@ -51,6 +68,7 @@ function HeaderRightContent() {
         <span className='sr-only'>User cart</span>
         </Button>
         <UserCartWrapper
+          setOpenCartSheet={setOpenCartSheet}
         cartItems={
             cartItems && cartItems.items && cartItems.items.length > 0
               ? cartItems.items
