@@ -1,25 +1,27 @@
 import { Route, Routes } from 'react-router-dom'
+import AdminLayout from './components/admin-view/layout'
 import AuthLayout from './components/auth/layout'
+import ShoppingLayout from './components/shopping-view/layout'
+import AdminDashboard from './pages/admin-view/dashboard'
+import AdminFeatures from './pages/admin-view/features'
+import AdminOrders from './pages/admin-view/orders'
+import AdminProducts from './pages/admin-view/products'
 import AuthLogin from './pages/auth/login'
 import AuthRegister from './pages/auth/register'
-import AdminLayout from './components/admin-view/layout'
-import AdminDashboard from './pages/admin-view/dashboard'
-import AdminProducts from './pages/admin-view/products'
-import AdminOrders from './pages/admin-view/orders'
-import AdminFeatures from './pages/admin-view/features'
-import ShoppingLayout from './components/shopping-view/layout'
 import NotFound from './pages/not-found'
 
+import { Skeleton } from "@/components/ui/skeleton"
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import CheckAuth from './components/common/check-auth'
+import ShoppingAccount from './pages/shopping-view/account'
+import ShoppingCheckout from './pages/shopping-view/checkout'
 import ShoppingHome from './pages/shopping-view/home'
 import ShoppingListing from './pages/shopping-view/lisiting'
-import ShoppingCheckout from './pages/shopping-view/checkout'
-import ShoppingAccount from './pages/shopping-view/account'
-import CheckAuth from './components/common/check-auth'
+import PaymentSuccessPage from './pages/shopping-view/payment-success'
+import PaypalReturnPage from './pages/shopping-view/paypal-return'
 import UnauthPage from './pages/unauth-page'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import { checkAuth } from './store/auth-slice'
-import { Skeleton } from "@/components/ui/skeleton"
 
 
 function App() {
@@ -70,8 +72,10 @@ function App() {
           }>
             <Route path='home' element={<ShoppingHome />} />
             <Route path='listing' element={<ShoppingListing />} />
-            <Route path='checkout' element={<ShoppingCheckout />} />
+            <Route path='checkout' element={<ShoppingCheckout />} />  
             <Route path='account' element={<ShoppingAccount />} />
+            <Route path='paypal-return' element={<PaypalReturnPage />} />
+            <Route path='payment-success' element={<PaymentSuccessPage />} />
             <Route />
           </Route>
           <Route path='/unauth-page' element={<UnauthPage />} />

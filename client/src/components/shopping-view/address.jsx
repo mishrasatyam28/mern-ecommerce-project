@@ -15,7 +15,7 @@ const initialAddressFormData = {
     notes: '',
 }
 
-export const Address = () => {
+export const Address = ({setCurrentSelectedAddress}) => {
 
 
     const [formData, setFormData] = useState(initialAddressFormData);
@@ -114,7 +114,8 @@ export const Address = () => {
                       addressList.map(singleAddressItem => <AddressCard
                         handleDeleteAddress={handleDeleteAddress}
                           addressInfo={singleAddressItem}
-                          handleEditAddress = {handleEditAddress}
+                          handleEditAddress={handleEditAddress}
+                          setCurrentSelectedAddress={setCurrentSelectedAddress}
                       />)
                       : null
               }
