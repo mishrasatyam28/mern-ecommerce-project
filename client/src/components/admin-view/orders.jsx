@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { getAllOrderForAdmin } from "@/store/admin/order-slice"
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import { Button } from "../ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { Dialog } from "../ui/dialog"
@@ -8,7 +10,14 @@ import AdminOrderDetailsView from "./order-details"
 const AdminOrdersView = () => {
 
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false)
+  const { orderList, orderDetails } = useState((state) => state.adminOrder)
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getAllOrderForAdmin())
+  },[])
+  
+// 11:54
   return (
     <Card>
           <CardHeader>
