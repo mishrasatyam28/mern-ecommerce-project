@@ -1,4 +1,4 @@
-import { getAllOrderForAdmin } from "@/store/admin/order-slice"
+import { getAllOrderForAdmin, getOrderDetailsForAdmin, resetOrderDetails } from "@/store/admin/order-slice"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Badge } from "../ui/badge"
@@ -14,9 +14,19 @@ const AdminOrdersView = () => {
   const { orderList, orderDetails } = useState((state) => state.adminOrder)
   const dispatch = useDispatch();
 
+  function handleFetchOrderDetails(getId) {
+    dispatch(getOrderDetailsForAdmin(getId))
+  }
+
   useEffect(() => {
     dispatch(getAllOrderForAdmin())
-  },[dispatch])
+  }, [dispatch])
+  
+  useEffect(() => {
+    if (orderDetails !== null) {
+      setOpenDetailsDialog(true)
+    }
+  },[orderDetails])
   
 
   return (
@@ -53,13 +63,13 @@ const AdminOrdersView = () => {
                   <TableCell>
                       <Dialog
                         open={openDetailsDialog}
-                        // onOpenChange={() => {
-                        // setOpenDetailsDialog(false)
-                        // dispatch(resetOrderDetails())
-                      // }}
+                        onOpenChange={() => {
+                        setOpenDetailsDialog(false)
+                        dispatch(resetOrderDetails())
+                      }}
                       >
                         <Button
-                          // onClick={() => handleFetchOrderDetails(orderItem?._id)}
+                          onClick={() => handleFetchOrderDetails(orderItem?._id)}
                         >
                       View Details
                       </Button>
@@ -77,5 +87,3 @@ const AdminOrdersView = () => {
 }
 
 export default AdminOrdersView
-
-// working on handlefetchOrderDetails
